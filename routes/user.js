@@ -8,7 +8,7 @@ const { passwordValidator } = require("../middleware/validateStrongPw");
 
 const router = Router();
 
-router.get("/users", async (res, res) => {
+router.get("/users", async (res, req) => {
   try {
     const users = await Users.findAll();
     res.status(200).send(users);
@@ -21,11 +21,11 @@ router.get("/users", async (res, res) => {
   }
 });
 
-router.get("/users/id", async (res, res) => {
+router.get("/users/id", async (res, req) => {
   const { id } = req.params;
   try {
     const user = await Users.findByPk(id);
-    res.status(200).send(user);
+    res.status(200).send(users);
   } catch (error) {
     res.status(422).send({
       error: "Unprocessable Entity",
