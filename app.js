@@ -7,7 +7,7 @@ const db = require("./db/index");
 require("./models/index");
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(cookieParser());
