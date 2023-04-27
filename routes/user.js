@@ -8,6 +8,33 @@ const { passwordValidator } = require("../middleware/validateStrongPw");
 
 const router = Router();
 
+router.get("/users", async (res, res) => {
+  try {
+    const users = await Users.findAll();
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(422).send({
+      error: "Unprocessable Entity",
+      message: "There was a problem finding all users",
+      details: error.message,
+    });
+  }
+});
+
+router.get("/users/id", async (res, res) => {
+  const { id } = req.params;
+  try {
+    const user = await Users.findByPk(id);
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(422).send({
+      error: "Unprocessable Entity",
+      message: "There was a problem finding the user",
+      details: error.message,
+    });
+  }
+});
+
 router.get("/favorites/:id", validateAuth, async (req, res) => {
   const { id } = req.params;
   try {
@@ -20,7 +47,7 @@ router.get("/favorites/:id", validateAuth, async (req, res) => {
   } catch (error) {
     res.status(422).send({
       error: "Unprocessable Entity",
-      message: "There was a problem find the Favorites List",
+      message: "There was a problem finding the Favorites List",
       details: error.message,
     });
   }
